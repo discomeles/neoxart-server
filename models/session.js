@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 let Schema = mongoose.Schema({
     user:{type:String,index:true},
@@ -6,4 +6,4 @@ let Schema = mongoose.Schema({
     token:String
 })
 
-module.exports = mongoose.model("Session",Schema);
+module.exports = mongoose.model('Session',Schema);
