@@ -3,14 +3,14 @@ const dataRouter = express.Router()
 const NoteData = require('../models/data')
 
 // --- Get all notes ---
-dataRouter.get('/api/data', (request, response) => {
+dataRouter.get('/', (request, response) => {
     NoteData.find({}).then(data => {
       response.json(data)
     })  
   })
   
   // --- Get note by id ---
-  dataRouter.get('/api/data/:id', (request,response,next) => {
+  dataRouter.get('/:id', (request,response,next) => {
     NoteData.findById(request.params.id)
       .then(data => {
         if (data) {
@@ -23,7 +23,7 @@ dataRouter.get('/api/data', (request, response) => {
   })
   
   // --- Delete note ---
-  dataRouter.delete('/api/data/:id', (request,response,next) => {
+  dataRouter.delete('/:id', (request,response,next) => {
     NoteData.findByIdAndDelete(request.params.id)
       .then ( result => {
         response.status(204).end()
@@ -32,12 +32,13 @@ dataRouter.get('/api/data', (request, response) => {
   })
   
   // --- Add note ---
-  dataRouter.post('/api/data', (request,response) => {
+  dataRouter.post('/', (request,response) => {
     const body = request.body
   
     const note = new NoteData({
-      name: body.name,
-      number: body.number
+      title: body.title,
+      text: body.text,
+      tags: body.tags
     })
     note.save().then(savedNoteData => {
       response.json(savedNoteData)
@@ -46,15 +47,16 @@ dataRouter.get('/api/data', (request, response) => {
   
   // --- Modify note ---
   
-  dataRouter.put('/api/data/:id', (request,response,next) => {
+  dataRouter.put('/:id', (request,response,next) => {
     const body = request.body
   
     const NoteData = {
-      name: body.name,
-      number: body.number
+      title: body.title,
+      text: body.text,
+      tags: body.tags
     }
   
-    NoteData.findByIdAndUpdate(req.params.id, NoteData, {new:true})
+    NoteData.findByIdAndUpdate(request.params.id, NoteData, {new:true})
       .then(updatedNoteData => {
         response.json(updatedNoteData)
       })

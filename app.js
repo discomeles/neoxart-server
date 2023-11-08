@@ -29,11 +29,13 @@ app.use(express.static('dist'))
 // --- Logger ---
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
-// morgan.token('body', (req) => {
-//   return JSON.stringify(req.body, ["name","number"])
-//   })
+morgan.token('body', (request) => {
+  return JSON.stringify(request.body, ["title"])
+  })
 
 // --- MongoDB connection ---
+console.log('connecting to', config.mongo_base_url)
+
 mongoose.connect(config.mongo_url)
   .then(result => {
     console.log("Connected to Mongo Atlas")

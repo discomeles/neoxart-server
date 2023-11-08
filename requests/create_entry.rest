@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "title":"Note 1",
+  "text":"No other object has been misidentified as a flying saucer more often than the planet Venus.",
+  "tags":"X-files, Venus, flying saucers"
+}

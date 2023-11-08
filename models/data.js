@@ -2,10 +2,11 @@ const mongoose = require('mongoose')
 
 // --- note data schema ----
 const noteDataSchema = new mongoose.Schema({
-    user:{type:String, index:true},
+    // user:{type:String, index:true},
     title:String,
     text:String,
-    tags:[{type:String}]
+    // tags:[{type:String}]
+    tags:String
 },
 // enforcing the collection name
 {collection: 'noteData'})
