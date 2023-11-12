@@ -4,6 +4,7 @@ const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
 const dataRouter = require('./routes/dataroute')
+const registerRouter = require('./routes/register')
 const NoteData = require('./models/data')
 const mongoose = require('mongoose')
 
@@ -45,7 +46,7 @@ mongoose.connect(config.mongo_url)
   })
 
 app.use('/api/data', dataRouter)
-
+app.use('/api/register', registerRouter)
 
 app.use(unknownEndpoint)
 app.use(errorHandler)

@@ -8,4 +8,15 @@ const userSchema = new mongoose.Schema({
 // enforcing the collection name
 {collection: 'users'})
 
-module.exports = mongoose.model('User', personSchema)
+// transforming the id from _id to id
+// do not reveal password hash
+userSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+      returnedObject.id = returnedObject._id.toString()
+      delete returnedObject._id
+      delete returnedObject.__v
+      delete returnedObject.password
+    }
+  })
+
+module.exports = mongoose.model('User', userSchema)
