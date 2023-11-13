@@ -5,12 +5,13 @@ const morgan = require('morgan')
 const cors = require('cors')
 const dataRouter = require('./routes/dataroute')
 const registerRouter = require('./routes/register')
+const loginRouter = require('./routes/login')
 const NoteData = require('./models/data')
 const mongoose = require('mongoose')
 
 // --- Error handling ---
 const errorHandler = (error, request, response, next) => {
-  console.error(err.message)
+  console.error(error.message)
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
@@ -47,6 +48,7 @@ mongoose.connect(config.mongo_url)
 
 app.use('/api/data', dataRouter)
 app.use('/api/register', registerRouter)
+app.use('/api/login', loginRouter)
 
 app.use(unknownEndpoint)
 app.use(errorHandler)

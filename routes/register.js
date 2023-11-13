@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const registerRouter = express.Router()
 const User = require('../models/user')
 
-checkDuplicateUsername = (request, response, next) => {
+const checkDuplicateUsername = (request, response, next) => {
   User.findOne({"username":request.body.username})
   .then( user => {
     if(user) {
@@ -15,7 +15,7 @@ checkDuplicateUsername = (request, response, next) => {
   })
 }
 
-checkDuplicateEmail = (request, response, next) => {
+const checkDuplicateEmail = (request, response, next) => {
   User.findOne({"email":request.body.email})
   .then( user => {
     if(user) {
@@ -28,9 +28,9 @@ checkDuplicateEmail = (request, response, next) => {
 }
 
 // --- Add user ---
-const check = [checkDuplicateUsername, checkDuplicateEmail]
+const registerCheck = [checkDuplicateUsername, checkDuplicateEmail]
 
-registerRouter.post('/', check, (request,response) => {
+registerRouter.post('/', registerCheck, (request,response) => {
   // hash and salt password
   const saltRounds = 13
   bcrypt.hash(request.body.password, saltRounds, (err, hash) => {

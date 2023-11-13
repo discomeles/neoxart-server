@@ -10,8 +10,12 @@ const mongo_url = `mongodb+srv://${mongo_user}:${mongo_password}@${mongo_base_ur
 // --- neo4j config ---
 // later
 
+// jason web token secret
+const jwtsecret = process.env.JWTSECRET
+
 module.exports = {
   port,
   mongo_base_url,
-  mongo_url
+  mongo_url,
+  jwtsecret
 }
