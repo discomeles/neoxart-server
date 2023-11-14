@@ -33,7 +33,7 @@ const registerCheck = [checkDuplicateUsername, checkDuplicateEmail]
 registerRouter.post('/', registerCheck, (request,response) => {
   // hash and salt password
   const saltRounds = 13
-  bcrypt.hash(request.body.password, saltRounds, (err, hash) => {
+  bcrypt.hash(request.body.password, saltRounds, (error, hash) => {
 
     let user = new User({
       username:request.body.username,

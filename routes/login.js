@@ -45,7 +45,11 @@ loginRouter.post('/', loginCheck, (request, response) => {
     id: response.locals.id,
   }
 
-  const token = jwt.sign(userTokenInfo, config.jwtsecret)
+  const token = jwt.sign(
+    userTokenInfo, 
+    config.jwtsecret,
+    { expiresIn: '1h'}
+  )
 
   response.status(200).send({
     token, username: request.body.username

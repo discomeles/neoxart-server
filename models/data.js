@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 // --- note data schema ----
 const noteDataSchema = new mongoose.Schema({
-    // user:{type:String, index:true},
+    userid:{type:String, index:true},
     title:String,
     text:String,
     // tags:[{type:String}]
